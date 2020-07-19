@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Test Download</title>
+</head>
+<body>
+<div id="app">
+    <div v-if="loading">Loading...</div>
+
+    <!-- O atributo 'download' indica que o conteúdo do link deve ser baixado e não navegado -->
+    <a href="/download" download @click="downloadLink()" v-if="!loading">Download Link</a>
+
+    <!-- Prefiro essa opção porque fica registrado a request no DevTools -->
+    <button @click="downloadButton()" v-if="!loading">Download Button</button>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script>
+    var app = new Vue({
+      el: '#app',
+      data: {
+        loading: false
+      },
+      methods: {
+        downloadLink: function() {
+            this.loading = true
+        },
+        downloadButton: function() {
+            this.loading = true
+            window.location.href = '/download';
+        }
+      }
+    });
+</script>
+</body>
+</html>
